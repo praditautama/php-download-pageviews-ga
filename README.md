@@ -23,3 +23,7 @@ php ga.php [START_DATE] [END_DATE]
 ```
 php ga.php 2016-01-01 2016-12-31
 ```
+
+#CSV Fields
+
+[slug],[PV],[YYYY-MM]
