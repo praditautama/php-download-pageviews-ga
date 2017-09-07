@@ -2,11 +2,11 @@
 
 simple php script to download data from Google Analytics
 
-#Requirement
+# Requirement
 *PHP
 *Access Token from https://ga-dev-tools.appspot.com/query-explorer/
 
-#Usage
+# Usage
 
 ```
 git@github.com:praditautama/php-download-pageviews-ga.git
@@ -24,6 +24,6 @@ php ga.php [START_DATE] [END_DATE]
 php ga.php 2016-01-01 2016-12-31
 ```
 
-#CSV Fields
+# CSV Fields
 
 [slug],[PV],[YYYY-MM]
