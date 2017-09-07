@@ -3,8 +3,8 @@
 simple php script to download data from Google Analytics
 
 # Requirement
-*PHP
-*Access Token from https://ga-dev-tools.appspot.com/query-explorer/
+* PHP
+* Access Token from https://ga-dev-tools.appspot.com/query-explorer/
 
 # Usage
 
