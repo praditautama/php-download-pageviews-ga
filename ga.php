@@ -8,6 +8,7 @@ $executionStartTime = microtime(true);
 //$startDate = "2016-01";
 //$endDate = "2016-03";
 if (!isset($argv[1]) || !isset($argv[1])) {
+    echo "Empty arguments. Example: 2016-06 2016-09\n";
     exit(1);
 } else {
     $startDate = $argv[1];
@@ -16,6 +17,7 @@ if (!isset($argv[1]) || !isset($argv[1])) {
 
 
 if ($argv[1] == '' || $argv[2] == '') {
+    echo "Empty arguments. Example: 2016-06 2016-09\n";
     exit(1);
 }
 
@@ -25,13 +27,26 @@ function validateDate($date) {
 }
 
 if (!validateDate($argv[1]) || !validateDate($argv[2])) {
+    echo "Invalid date format. Example: 2016-06 2016-09\n";
     exit(1);
 }
 
 $startMonth = date("m", strtotime($startDate));
+$startYear = date("Y", strtotime($startDate));
 $endMonth = date("m", strtotime($endDate));
+$endYear = date("Y", strtotime($endDate));
 $startLastDay = date("t", strtotime($startDate));
 $endLastDay = date("t", strtotime($endDate));
+
+if (intval($endYear) > intval($startYear)) {
+    echo "Currently only support same year\n";
+    exit(1);
+}
+
+if (intval($endMonth) < intval($startMonth)) {
+    echo "End date must be greater than start date\n";
+    exit(1);
+}
 
 $gaID = "ga:76665870";
 $startIndex = 1;
