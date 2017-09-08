@@ -36,15 +36,15 @@ $endLastDay = date("t", strtotime($endDate));
 $gaID = "ga:76665870";
 $startIndex = 1;
 $maxResults = 10000;
-$accessToken = "ya29.Gly_BDSK4ELWQozvhZiKT1S1S-agEVUD2Z8xPO9ShZAvvyrNm4yeybqRjBGupUsiqUhFMq6gc2lzhDOx_d0trDuHhCEWZfSa8Z_0saEBcfT-9WbgSFQsZqDqsUmN8w";
+$accessToken = "ya29.GlzABHc594hZOYhcQNTCEgGUY4u4TkNapDS5gh9ZcdS_mgrYTMgYPyFvmukofZ1m1VV9J4C27gbE2776bcjs-wlfd2DdVsbAIOyENF0qCQactbe-WnxuqTU0fKwoaQ";
 $metrics = "ga:pageviews";
 $dimension = "ga:pagePath";
 
 $totalMonths = intval(date("n", strtotime($endDate))) - intval(date("n", strtotime($startDate))) + 1;
 
 echo "-------------------------------------------------\n";
-echo "Start Date\t\t: ".$startDate."-01\n";
-echo "End Date\t\t: ".$endDate."-".$endLastDay."\n";
+echo "Start Date\t\t: ".$startDate."\n";
+echo "End Date\t\t: ".$endDate."\n";
 echo "Total Months\t\t: ".$totalMonths."\n";
 echo "-------------------------------------------------\n";
 
@@ -105,7 +105,7 @@ for ($j = 1; $j <= $totalMonths; $j++) {
         echo "Batch\t\t\t: ".$i."\n";
         echo "Filename\t\t: ".$fileName."\n";
         echo "Total Rows\t\t: ".$totalRows."\n";
-        echo "URL\t\t\t: ".$urlBatchPerMonth."\n";
+        //echo "URL\t\t\t: ".$urlBatchPerMonth."\n";
         echo "-------------------------------------------------\n";
 
         $fp = fopen($fileName, 'w');
@@ -117,8 +117,12 @@ for ($j = 1; $j <= $totalMonths; $j++) {
         
         fclose($fp);
     }
-    system("cat ".$dirRawData."PV-".$year."-".strtoupper(date("M", strtotime($startDateRequest)))."*.csv > ".$dirCompiled."PV-".$year."-".strtoupper(date("M", strtotime($startDateRequest)))."-compiled.csv");
+    $compiledFilePath = $dirCompiled."PV-".$year."-".strtoupper(date("M", strtotime($startDateRequest)))."-compiled.csv";
+    system("cat ".$dirRawData."PV-".$year."-".strtoupper(date("M", strtotime($startDateRequest)))."*.csv > ".$compiledFilePath);
     $month++;
+
+    echo "Compiled File\t\t: ".$compiledFilePath."\n";
+    echo "-------------------------------------------------\n";
 }
 
 $executionEndTime = microtime(true);
