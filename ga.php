@@ -8,7 +8,7 @@ $executionStartTime = microtime(true);
 //$startDate = "2016-01";
 //$endDate = "2016-03";
 if (!isset($argv[1]) || !isset($argv[1])) {
-    echo "Empty arguments. Example: 2016-06 2016-09\n";
+    echo "Empty arguments. Example: 2016-06-30 2016-12-31\n";
     exit(1);
 } else {
     $startDate = $argv[1];
@@ -17,7 +17,7 @@ if (!isset($argv[1]) || !isset($argv[1])) {
 
 
 if ($argv[1] == '' || $argv[2] == '') {
-    echo "Empty arguments. Example: 2016-06 2016-09\n";
+    echo "Empty arguments. Example: 2016-06-30 2016-12-31\n";
     exit(1);
 }
 
@@ -27,7 +27,7 @@ function validateDate($date) {
 }
 
 if (!validateDate($argv[1]) || !validateDate($argv[2])) {
-    echo "Invalid date format. Example: 2016-06 2016-09\n";
+    echo "Invalid date format. Example: 2016-06-30 2016-12-31\n";
     exit(1);
 }
 
@@ -95,9 +95,9 @@ for ($j = 1; $j <= $totalMonths; $j++) {
     $totalResults = $dataBatch['totalResults'];
     $totalPages = ceil(intval($totalResults) / $maxResults);
 
-    echo "Month\t\t\t: ".strtoupper(date('F', mktime(0, 0, 0, $month, 10)))."\n";
-    echo "Total Results\t\t: ".$totalResults."\n";
-    echo "Total Batches\t\t: ".$totalPages."\n";
+    echo "   Month\t\t: ".strtoupper(date('F', mktime(0, 0, 0, $month, 10)))."\n";
+    echo "   Total Results\t: ".$totalResults."\n";
+    echo "   Total Batches\t: ".$totalPages."\n";
     //echo "URL\t\t\t: ".$urlBatch."\n";
     echo "-------------------------------------------------\n";
     
@@ -117,9 +117,9 @@ for ($j = 1; $j <= $totalMonths; $j++) {
     
         $totalRows = count($dataBatchPerMonth['rows']);
         $fileName = $dirRawData."PV-".date("Y", strtotime($startDate))."-".strtoupper(date("M", strtotime($startDateRequest)))."-batch-".$i.".csv";
-        echo "Batch\t\t\t: ".$i."\n";
-        echo "Filename\t\t: ".$fileName."\n";
-        echo "Total Rows\t\t: ".$totalRows."\n";
+        echo "      Batch\t\t: ".$i."\n";
+        echo "      Filename\t\t: ".$fileName."\n";
+        echo "      Total Rows\t: ".$totalRows."\n";
         //echo "URL\t\t\t: ".$urlBatchPerMonth."\n";
         echo "-------------------------------------------------\n";
 
@@ -136,9 +136,15 @@ for ($j = 1; $j <= $totalMonths; $j++) {
     system("cat ".$dirRawData."PV-".$year."-".strtoupper(date("M", strtotime($startDateRequest)))."*.csv > ".$compiledFilePath);
     $month++;
 
-    echo "Compiled File\t\t: ".$compiledFilePath."\n";
+    echo "   Compiled File\t: ".$compiledFilePath."\n";
     echo "-------------------------------------------------\n";
 }
+$compiledFilePath = $dirCompiled."PV-compiled-ALL.csv";
+system("cat ".$dirRawData."PV*.csv > ".$compiledFilePath);
+$month++;
+
+echo "All Compiled File\t: ".$compiledFilePath."\n";
+echo "-------------------------------------------------\n";
 
 $executionEndTime = microtime(true);
 $seconds = $executionEndTime - $executionStartTime;
